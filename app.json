@@ -1,0 +1,21 @@
+{
+  "name": "SURYA-X",
+  "description": "SURYA-X WhatsApp bot made by DARK SURYA",
+  "logo": "https://files.catbox.moe/jbrn0i.jpg",
+  "keywords": ["bot","SURYA-X","SURYA-X"],
+  "success_url": "/",
+
+  "env": {
+    "SESSION_ID": {
+        "description": "Put the SURYA-X session-id here.",
+        "required": true
+    }
+},
+
+"buildpacks": [
+    {
+        "url": "https://github.com/heroku/heroku-buildpack-nodejs.git"
+    }
+],
+"stack": "heroku-24"
+}
