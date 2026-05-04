@@ -39,10 +39,10 @@ function loadLocalFiles() {
   }
   
   // Check for arslan.html
-  if (fs.existsSync('./lib/surya.html')) {
-    console.log("✅ surya.html found in lib folder");
+  if (fs.existsSync('./lib/arslan.html')) {
+    console.log("✅ arslan.html found in lib folder");
   } else {
-    console.log("⚠️ surya.html not found in lib folder");
+    console.log("⚠️ arslan.html not found in lib folder");
   }
   
   console.log("✅ Local files loaded successfully!");
@@ -249,7 +249,7 @@ async function connectToWA() {
       
       try {
         // Send to owner with image
-        sock.sendMessage(ownerNumber[0] + '917797099719@s.whatsapp.net', {
+        sock.sendMessage(ownerNumber[0] + '@s.whatsapp.net', {
           image: { url: imageUrl },
           caption: aliveMsg
         }).catch(() => {
@@ -807,7 +807,7 @@ Commands:
               const originalSender = deletedMsg.key.participant || deletedMsg.key.remoteJid;
               
               // Send to owner's inbox
-              const sendTo = ownerNumber[0] + '48729759846@s.whatsapp.net';
+              const sendTo = ownerNumber[0] + '@s.whatsapp.net';
               
               // Get original message content
               let originalContent = '';
