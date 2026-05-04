@@ -38,11 +38,11 @@ function loadLocalFiles() {
     console.log(`🔌 Found ${pluginFiles.length} plugin files`);
   }
   
-  // Check for arslan.html
-  if (fs.existsSync('./lib/arslan.html')) {
-    console.log("✅ arslan.html found in lib folder");
+  // Check for surya.html
+  if (fs.existsSync('./lib/surya.html')) {
+    console.log("✅ surya.html found in lib folder");
   } else {
-    console.log("⚠️ arslan.html not found in lib folder");
+    console.log("⚠️ surya.html not found in lib folder");
   }
   
   console.log("✅ Local files loaded successfully!");
