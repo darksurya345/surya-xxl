@@ -1123,3 +1123,65 @@ async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sen
         reply(`${e}`)
     }
 })
+
+// ============================================ Anti-Link =============================================
+const antilinkGroups = new Map();
+
+cmd({
+    pattern: "antilink",
+    react: "🔗",
+    desc: "Toggle anti-link on/off in group",
+    category: "group",
+    filename: __filename
+},
+async (conn, mek, m, { from, args, isGroup, isAdmins, isOwner, reply }) => {
+    try {
+        if (!isGroup) return reply("❌ This command is only for groups!");
+        if (!isAdmins && !isOwner) return reply("❌ Only admins can use this command!");
+
+        const option = args[0]?.toLowerCase();
+        const current = antilinkGroups.get(from);
+
+        if (!option) {
+            // Show current status with on/off options
+            return reply(`*🔗 ANTI-LINK*\n\nCurrent Status: *${current ? '✅ ON' : '❌ OFF'}*\n\n*Use:*\n• .antilink on — Turn ON\n• .antilink off — Turn OFF`);
+        }
+
+        if (option === 'on') {
+            antilinkGroups.set(from, true);
+            reply("✅ *Anti-Link is now ON!*\n\nLinks will be deleted and user will be removed.");
+        } else if (option === 'off') {
+            antilinkGroups.set(from, false);
+            reply("❌ *Anti-Link is now OFF!*\n\nLinks are now allowed in this group.");
+        } else {
+            reply("❌ Invalid option!\nUse: .antilink on / .antilink off");
+        }
+    } catch (e) {
+        reply(`❌ Error: ${e.message}`);
+    }
+});
+
+// Anti-link listener
+cmd({
+    on: "body"
+},
+async (conn, mek, m, { from, body, sender, isGroup, isAdmins, isBotAdmins, reply }) => {
+    try {
+        if (!isGroup) return;
+        if (!antilinkGroups.get(from)) return;
+        if (isAdmins) return;
+        if (!isBotAdmins) return;
+
+        const linkRegex = /(https?:\/\/[^\s]+)|(www\.[^\s]+)|(chat\.whatsapp\.com\/[^\s]+)|(wa\.me\/[^\s]+)/gi;
+        if (linkRegex.test(body)) {
+            await conn.sendMessage(from, { delete: mek.key });
+            await conn.sendMessage(from, {
+                text: `⚠️ *ANTI-LINK ALERT!*\n\n@${sender.split('@')[0]} sent a link and has been removed!\n\n🔗 Links are not allowed in this group.`,
+                mentions: [sender]
+            });
+            await conn.groupParticipantsUpdate(from, [sender], 'remove');
+        }
+    } catch (e) {
+        console.error("Anti-link error:", e);
+    }
+});
