@@ -353,11 +353,20 @@ ${bot.COPYRIGHT}`;
         // Listen for the reply - using once to avoid duplicate listeners
         const menuHandler = async (msgUpdate) => {
             const msg = msgUpdate.messages[0];
-            if (!msg.message || !msg.message.extendedTextMessage) return;
-            
-            const selectedOption = msg.message.extendedTextMessage.text.trim();
+            if (!msg.message) return;
 
-            if (msg.message.extendedTextMessage.contextInfo?.stanzaId === menuMessage.key.id) {
+            // Handle both reply and plain message
+            const isExtended = msg.message.extendedTextMessage;
+            const isConversation = msg.message.conversation;
+            const selectedOption = (isExtended?.text || isConversation || '').trim();
+            const stanzaId = isExtended?.contextInfo?.stanzaId;
+
+            // Match by stanzaId (reply) OR by sender and recent time
+            const isReply = stanzaId === menuMessage.key.id;
+            const isSameSender = msg.key.remoteJid === menuMessage.key.remoteJid;
+            const isRecent = Date.now() - (msg.messageTimestamp * 1000) < 300000;
+
+            if ((isReply || isSameSender) && isRecent && selectedOption) {
                 conn.ev.off('messages.upsert', menuHandler);
 
                 switch (selectedOption) {
@@ -1202,4 +1211,3 @@ cmd({
           reply("An error occurred while processing the message.");
       }
   });
-  
