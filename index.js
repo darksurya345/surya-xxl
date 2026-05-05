@@ -18,34 +18,34 @@ const ownerNumber = ["917797099719"];
 
 // ==================== LOCAL FILES LOADER ====================
 function loadLocalFiles() {
-  console.log("📂 Loading local lib and plugins...");
+  console.log("ðŸ“‚ Loading local lib and plugins...");
   
   if (!fs.existsSync('./lib')) {
-    console.log("❌ lib folder not found! Creating empty lib folder...");
+    console.log("âŒ lib folder not found! Creating empty lib folder...");
     fs.mkdirSync('./lib', { recursive: true });
   } else {
-    console.log("✅ lib folder found");
+    console.log("âœ… lib folder found");
     const libFiles = fs.readdirSync('./lib').filter(f => f.endsWith('.js'));
-    console.log(`📚 Found ${libFiles.length} lib files`);
+    console.log(`ðŸ“š Found ${libFiles.length} lib files`);
   }
   
   if (!fs.existsSync('./plugins')) {
-    console.log("❌ plugins folder not found! Creating empty plugins folder...");
+    console.log("âŒ plugins folder not found! Creating empty plugins folder...");
     fs.mkdirSync('./plugins', { recursive: true });
   } else {
-    console.log("✅ plugins folder found");
+    console.log("âœ… plugins folder found");
     const pluginFiles = fs.readdirSync('./plugins').filter(f => f.endsWith('.js'));
-    console.log(`🔌 Found ${pluginFiles.length} plugin files`);
+    console.log(`ðŸ”Œ Found ${pluginFiles.length} plugin files`);
   }
   
   // Check for surya.html
   if (fs.existsSync('./lib/surya.html')) {
-    console.log("✅ surya.html found in lib folder");
+    console.log("âœ… surya.html found in lib folder");
   } else {
-    console.log("⚠️ surya.html not found in lib folder");
+    console.log("âš ï¸ surya.html not found in lib folder");
   }
   
-  console.log("✅ Local files loaded successfully!");
+  console.log("âœ… Local files loaded successfully!");
 }
 
 loadLocalFiles();
@@ -57,10 +57,10 @@ const messageStore = new Map();
 const groupSettings = new Map();
 
 // Default welcome message
-const DEFAULT_WELCOME = "╭──❍ *WELCOME* ❍──╮\n│\n├─❍ *User:* @user\n├─❍ *Group:* @group\n├─❍ *Members:* @count\n│\n╰──────────────────────❍\n\n> Enjoy your stay! 🎉";
+const DEFAULT_WELCOME = "â•­â”€â”€â *WELCOME* ââ”€â”€â•®\nâ”‚\nâ”œâ”€â *User:* @user\nâ”œâ”€â *Group:* @group\nâ”œâ”€â *Members:* @count\nâ”‚\nâ•°â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â\n\n> Enjoy your stay! ðŸŽ‰";
 
 // Default goodbye message
-const DEFAULT_GOODBYE = "╭──❍ *GOODBYE* ❍──╮\n│\n├─❍ *User:* @user\n├─❍ *Group:* @group\n├─❍ *Left the group*\n│\n╰──────────────────────❍\n\n> We'll miss you! 👋";
+const DEFAULT_GOODBYE = "â•­â”€â”€â *GOODBYE* ââ”€â”€â•®\nâ”‚\nâ”œâ”€â *User:* @user\nâ”œâ”€â *Group:* @group\nâ”œâ”€â *Left the group*\nâ”‚\nâ•°â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â\n\n> We'll miss you! ðŸ‘‹";
 
 // Session handling
 const AUTH_DIR = path.join(__dirname, 'auth_info_baileys');
@@ -68,13 +68,13 @@ const CREDS = path.join(AUTH_DIR, 'creds.json');
 
 if (!fs.existsSync(CREDS)) {
   if (!config.SESSION_ID) {
-    console.log("❌ SESSION_ID missing");
+    console.log("âŒ SESSION_ID missing");
     process.exit(1);
   }
   
   let session = config.SESSION_ID.trim();
   if (!session.includes("SURYA-X~")) {
-    console.log("❌ Invalid SURYA-X session format");
+    console.log("âŒ Invalid SURYA-X session format");
     process.exit(1);
   }
   
@@ -83,7 +83,7 @@ if (!fs.existsSync(CREDS)) {
   
   fs.mkdirSync(AUTH_DIR, { recursive: true });
   fs.writeFileSync(CREDS, decoded, { encoding: 'utf8' });
-  console.log("♻️ SURYA-X session restored successfully");
+  console.log("â™»ï¸ SURYA-X session restored successfully");
 }
 
 // Load group settings from file if exists
@@ -94,9 +94,9 @@ if (fs.existsSync(SETTINGS_FILE)) {
     for (const [groupId, settings] of Object.entries(savedSettings)) {
       groupSettings.set(groupId, settings);
     }
-    console.log("✅ Group settings loaded from file");
+    console.log("âœ… Group settings loaded from file");
   } catch (e) {
-    console.log("⚠️ Could not load group settings");
+    console.log("âš ï¸ Could not load group settings");
   }
 }
 
@@ -109,7 +109,7 @@ function saveGroupSettings() {
     }
     fs.writeFileSync(SETTINGS_FILE, JSON.stringify(settingsObj, null, 2), 'utf8');
   } catch (e) {
-    console.error("❌ Could not save group settings:", e);
+    console.error("âŒ Could not save group settings:", e);
   }
 }
 
@@ -138,8 +138,8 @@ app.get('/', (req, res) => {
       </head>
       <body>
         <div class="container">
-          <h1>🤖 SURYA-X</h1>
-          <p class="status">✅ BOT IS CONNECTED</p>
+          <h1>ðŸ¤– SURYA-X</h1>
+          <p class="status">âœ… BOT IS CONNECTED</p>
           <p>Type .menu in WhatsApp to see commands</p>
           <p>Owner: ${config.OWNER_NAME || 'SURYA'}</p>
         </div>
@@ -153,7 +153,7 @@ app.get('/lib/arslan.html', (req, res) => {
   res.redirect('/');
 });
 
-app.listen(port, '0.0.0.0', () => console.log(`🌐 Web server running on port ${port}`));
+app.listen(port, '0.0.0.0', () => console.log(`ðŸŒ Web server running on port ${port}`));
 
 // Function to get user profile picture
 async function getProfilePicture(sock, jid) {
@@ -167,10 +167,10 @@ async function getProfilePicture(sock, jid) {
 
 // Main bot function
 async function connectToWA() {
-  console.log("✅ Using local lib and plugins only");
+  console.log("âœ… Using local lib and plugins only");
   
   const prefix = config.PREFIX || '.';
-  console.log(`🤖 SURYA-X Connecting with prefix: "${prefix}"`);
+  console.log(`ðŸ¤– SURYA-X Connecting with prefix: "${prefix}"`);
   
   const { state: authState, saveCreds: saveCreds } = await useMultiFileAuthState(__dirname + '/auth_info_baileys/');
   
@@ -181,9 +181,9 @@ async function connectToWA() {
     functions = require('./lib/functions');
     sms = require('./lib/msg').sms;
     botConfig = require('./lib/bot');
-    console.log("✅ Lib files loaded successfully");
+    console.log("âœ… Lib files loaded successfully");
   } catch (err) {
-    console.log("❌ Error loading lib files:", err);
+    console.log("âŒ Error loading lib files:", err);
     process.exit(1);
   }
   
@@ -208,24 +208,24 @@ async function connectToWA() {
       const statusCode = lastDisconnect.error?.output?.statusCode;
       
       if (statusCode === DisconnectReason.loggedOut) {
-        console.log("❌ Device Logged Out, please delete auth_info_baileys and rescan.");
+        console.log("âŒ Device Logged Out, please delete auth_info_baileys and rescan.");
         process.exit();
       } else if (statusCode === DisconnectReason.connectionReplaced) {
-        console.log("❌ Connection replaced. Another session is active.");
+        console.log("âŒ Connection replaced. Another session is active.");
         process.exit();
       } else if (lastDisconnect.error?.message?.includes("Bad MAC")) {
-        console.log("⚠️ Bad MAC error. Deleting session...");
+        console.log("âš ï¸ Bad MAC error. Deleting session...");
         fs.rmSync(__dirname + '/auth_info_baileys', { recursive: true, force: true });
         connectToWA();
       } else {
-        console.log("🔄 Connection closed, reconnecting...");
+        console.log("ðŸ”„ Connection closed, reconnecting...");
         connectToWA();
       }
     } else if (connection === 'open') {
-      console.log("✅ SURYA-X Bot connected to WhatsApp!");
+      console.log("âœ… SURYA-X Bot connected to WhatsApp!");
       
       // Load plugins
-      console.log("🔌 Loading plugins...");
+      console.log("ðŸ”Œ Loading plugins...");
       const pluginFiles = fs.readdirSync('./plugins/').filter(f => f.endsWith('.js'));
       let loadedCount = 0;
       
@@ -233,48 +233,41 @@ async function connectToWA() {
         try {
           require('./plugins/' + file);
           loadedCount++;
-          console.log(`  ✅ Loaded: ${file}`);
+          console.log(`  âœ… Loaded: ${file}`);
         } catch (err) {
-          console.log(`  ❌ Failed to load ${file}: ${err.message}`);
+          console.log(`  âŒ Failed to load ${file}: ${err.message}`);
         }
       }
       
-      console.log(`✅ Plugins loaded: ${loadedCount}/${pluginFiles.length}`);
+      console.log(`âœ… Plugins loaded: ${loadedCount}/${pluginFiles.length}`);
       
       // Send connection message with image
-      const aliveMsg = `*╭──────────────●●►*\n> *SURYA-X CONNECTED SUCCESSFULLY*\n\n> *Type ${prefix}menu to view commands*  \n\n*╭⊱✫ SURYA-X ✫⊱╮*\n*│✫📂 Bot Name: ${botConfig.BOT_NAME}*\n*│✫🛡️ Owner: ${config.OWNER_NAME}*\n*│✫♻️ Prefix: ${prefix}*\n*│✫🌍 Mode: ${config.MODE}*\n*│✫⏰ Uptime: ${runtime(process.uptime())}*\n*╰──────────────●●►*\n\n> Enjoy Using SURYA-X`;
+      const aliveMsg = `*â•­â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â—â—â–º*\n> *SURYA-X CONNECTED SUCCESSFULLY*\n\n> *Type ${prefix}menu to view commands*  \n\n*â•­âŠ±âœ« SURYA-X âœ«âŠ±â•®*\n*â”‚âœ«ðŸ“‚ Bot Name: ${botConfig.BOT_NAME}*\n*â”‚âœ«ðŸ›¡ï¸ Owner: ${config.OWNER_NAME}*\n*â”‚âœ«â™»ï¸ Prefix: ${prefix}*\n*â”‚âœ«ðŸŒ Mode: ${config.MODE}*\n*â”‚âœ«â° Uptime: ${runtime(process.uptime())}*\n*â•°â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â—â—â–º*\n\n> Enjoy Using SURYA-X`;
       
       // Image URL for connection message
       const imageUrl = 'https://files.catbox.moe/jbrn0i.jpg';
       
       try {
-        // Send to owner with image
-        sock.sendMessage(ownerNumber[0] + '@s.whatsapp.net', {
+        // Send only to bot's own number (Myself)
+        const botJid = sock.user.id.split(":")[0] + "@s.whatsapp.net";
+        sock.sendMessage(botJid, {
           image: { url: imageUrl },
           caption: aliveMsg
         }).catch(() => {
-          // Fallback to text if image fails
-          sock.sendMessage(ownerNumber[0] + '@s.whatsapp.net', { text: aliveMsg });
+          sock.sendMessage(botJid, { text: aliveMsg });
         });
         
-        // Send to bot's own number
-        sock.sendMessage(sock.user.id, {
-          image: { url: imageUrl },
-          caption: aliveMsg
-        }).catch(() => {
-          sock.sendMessage(sock.user.id, { text: aliveMsg });
-        });
-        
-        console.log("✅ Connection message sent with image");
+        console.log("âœ… Connection message sent to bot's own number");
       } catch (err) {
-        console.log("⚠️ Could not send connection message with image, sending text only");
-        sock.sendMessage(ownerNumber[0] + '@s.whatsapp.net', { text: aliveMsg });
+        console.log("âš ï¸ Could not send connection message with image, sending text only");
+        const botJid = sock.user.id.split(":")[0] + "@s.whatsapp.net";
+        sock.sendMessage(botJid, { text: aliveMsg });
       }
     }
   });
 
   // Anti-call feature
-  const callMsg = `⚠️ *ANTI-CALL IS ACTIVE* ⚠️\n\nDear User,\n\nYou have attempted to call the bot. To ensure uninterrupted service, please refrain from calling.\n\nThank you for your understanding.\n\n${botConfig.COPYRIGHT || 'SURYA-X'}`;
+  const callMsg = `âš ï¸ *ANTI-CALL IS ACTIVE* âš ï¸\n\nDear User,\n\nYou have attempted to call the bot. To ensure uninterrupted service, please refrain from calling.\n\nThank you for your understanding.\n\n${botConfig.COPYRIGHT || 'SURYA-X'}`;
   
   sock.ev.on('call', async (calls) => {
     if (config.ANTI_CALL === 'true') {
@@ -282,14 +275,14 @@ async function connectToWA() {
         if (call.status === 'offer') {
           await sock.sendMessage(call.from, { text: callMsg });
           await sock.rejectCall(call.id, call.from);
-          console.log(`📞 Rejected call from ${call.from}`);
+          console.log(`ðŸ“ž Rejected call from ${call.from}`);
         }
       }
     }
   });
 
   // Emoji list for auto react
-  const emojiList = ['😊', '👍', '😂', '❤️', '🔥', '🥰', '👌', '💯', '🤣', '😎', '✨', '⭐', '🌟', '💫', '⚡', '💥', '🙏', '🎉', '👏', '💯', '👑', '🤖', '🫡', '✅', '🔰', '💚', '💙', '💜', '🖤', '🤍', '💛', '🧡', '💖', '💝', '💞'];
+  const emojiList = ['ðŸ˜Š', 'ðŸ‘', 'ðŸ˜‚', 'â¤ï¸', 'ðŸ”¥', 'ðŸ¥°', 'ðŸ‘Œ', 'ðŸ’¯', 'ðŸ¤£', 'ðŸ˜Ž', 'âœ¨', 'â­', 'ðŸŒŸ', 'ðŸ’«', 'âš¡', 'ðŸ’¥', 'ðŸ™', 'ðŸŽ‰', 'ðŸ‘', 'ðŸ’¯', 'ðŸ‘‘', 'ðŸ¤–', 'ðŸ«¡', 'âœ…', 'ðŸ”°', 'ðŸ’š', 'ðŸ’™', 'ðŸ’œ', 'ðŸ–¤', 'ðŸ¤', 'ðŸ’›', 'ðŸ§¡', 'ðŸ’–', 'ðŸ’', 'ðŸ’ž'];
   
   // Creds update
   sock.ev.on('creds.update', saveCreds);
@@ -350,9 +343,9 @@ async function connectToWA() {
                 });
               });
               
-              console.log(`👋 Welcome message sent to ${participantJid} in ${groupName}`);
+              console.log(`ðŸ‘‹ Welcome message sent to ${participantJid} in ${groupName}`);
             } catch (error) {
-              console.error("❌ Welcome message error:", error);
+              console.error("âŒ Welcome message error:", error);
             }
           }
           
@@ -383,15 +376,15 @@ async function connectToWA() {
                 });
               });
               
-              console.log(`👋 Goodbye message sent for ${participantJid} in ${groupName}`);
+              console.log(`ðŸ‘‹ Goodbye message sent for ${participantJid} in ${groupName}`);
             } catch (error) {
-              console.error("❌ Goodbye message error:", error);
+              console.error("âŒ Goodbye message error:", error);
             }
           }
         }
       }
     } catch (error) {
-      console.error("❌ Welcome/Goodbye error:", error);
+      console.error("âŒ Welcome/Goodbye error:", error);
     }
   });
 
@@ -411,28 +404,28 @@ async function connectToWA() {
         if (config.AUTO_STATUS_MSG === 'true') {
           try {
             await sock.readMessages([msg.key]);
-            console.log("📖 Status seen");
+            console.log("ðŸ“– Status seen");
             
             // Status par react bhi karega
             const botJid = await jidNormalizedUser(sock.user.id);
             await sock.sendMessage(msg.key.remoteJid, {
               react: {
                 key: msg.key,
-                text: '💚'
+                text: 'ðŸ’š'
               }
             }, {
               statusJidList: [msg.key.participant, botJid]
             }).catch(() => {});
             
           } catch (error) {
-            console.error("❌ Failed to mark status as read:", error);
+            console.error("âŒ Failed to mark status as read:", error);
           }
         }
         
         // AUTO STATUS REPLY - Status uploader ko reply
         if (config.AUTO_STATUS_REPLY === 'true' && msg.key.participant) {
           try {
-            const statusReplyMsg = botConfig.STATUS_MSG || 'Thanks for status! ❤️';
+            const statusReplyMsg = botConfig.STATUS_MSG || 'Thanks for status! â¤ï¸';
             await sock.sendMessage(msg.key.participant, {
               text: statusReplyMsg
             }).catch(() => {});
@@ -518,7 +511,7 @@ async function connectToWA() {
       
       // Log command
       if (isCmd) {
-        console.log(`🔍 Command: ${command} from ${pushName} (${senderNumber})`);
+        console.log(`ðŸ” Command: ${command} from ${pushName} (${senderNumber})`);
       }
       
       // ============ MODE HANDLING ============
@@ -551,7 +544,7 @@ async function connectToWA() {
         // WELCOME ON/OFF
         if (command === 'welcome') {
           if (!isAdmins && !isOwner) {
-            return reply('❌ Only admins can use this command!');
+            return reply('âŒ Only admins can use this command!');
           }
           
           const option = args[0]?.toLowerCase();
@@ -560,12 +553,12 @@ async function connectToWA() {
             groupSetting.welcome = true;
             groupSettings.set(from, groupSetting);
             saveGroupSettings();
-            reply('✅ Welcome messages have been turned ON for this group!');
+            reply('âœ… Welcome messages have been turned ON for this group!');
           } else if (option === 'off') {
             groupSetting.welcome = false;
             groupSettings.set(from, groupSetting);
             saveGroupSettings();
-            reply('✅ Welcome messages have been turned OFF for this group!');
+            reply('âœ… Welcome messages have been turned OFF for this group!');
           } else {
             reply(`Welcome messages are currently: ${groupSetting.welcome ? 'ON' : 'OFF'}\n\nUse:\n.welcome on - Turn ON\n.welcome off - Turn OFF`);
           }
@@ -574,7 +567,7 @@ async function connectToWA() {
         // GOODBYE ON/OFF
         else if (command === 'goodbye') {
           if (!isAdmins && !isOwner) {
-            return reply('❌ Only admins can use this command!');
+            return reply('âŒ Only admins can use this command!');
           }
           
           const option = args[0]?.toLowerCase();
@@ -583,12 +576,12 @@ async function connectToWA() {
             groupSetting.goodbye = true;
             groupSettings.set(from, groupSetting);
             saveGroupSettings();
-            reply('✅ Goodbye messages have been turned ON for this group!');
+            reply('âœ… Goodbye messages have been turned ON for this group!');
           } else if (option === 'off') {
             groupSetting.goodbye = false;
             groupSettings.set(from, groupSetting);
             saveGroupSettings();
-            reply('✅ Goodbye messages have been turned OFF for this group!');
+            reply('âœ… Goodbye messages have been turned OFF for this group!');
           } else {
             reply(`Goodbye messages are currently: ${groupSetting.goodbye ? 'ON' : 'OFF'}\n\nUse:\n.goodbye on - Turn ON\n.goodbye off - Turn OFF`);
           }
@@ -597,77 +590,77 @@ async function connectToWA() {
         // SET WELCOME MESSAGE
         else if (command === 'setwelcome') {
           if (!isAdmins && !isOwner) {
-            return reply('❌ Only admins can use this command!');
+            return reply('âŒ Only admins can use this command!');
           }
           
           if (!q) {
-            return reply(`❌ Please provide a welcome message!\n\nAvailable variables:\n@user - Mention user\n@group - Group name\n@count - Member count\n@desc - Group description\n\nExample:\n.setwelcome Hello @user! Welcome to @group`);
+            return reply(`âŒ Please provide a welcome message!\n\nAvailable variables:\n@user - Mention user\n@group - Group name\n@count - Member count\n@desc - Group description\n\nExample:\n.setwelcome Hello @user! Welcome to @group`);
           }
           
           groupSetting.welcomeMsg = q;
           groupSettings.set(from, groupSetting);
           saveGroupSettings();
-          reply('✅ Welcome message has been updated!\n\nPreview:\n' + q.replace(/@user/g, '@user').replace(/@group/g, groupName).replace(/@count/g, participants.length));
+          reply('âœ… Welcome message has been updated!\n\nPreview:\n' + q.replace(/@user/g, '@user').replace(/@group/g, groupName).replace(/@count/g, participants.length));
         }
         
         // SET GOODBYE MESSAGE
         else if (command === 'setgoodbye') {
           if (!isAdmins && !isOwner) {
-            return reply('❌ Only admins can use this command!');
+            return reply('âŒ Only admins can use this command!');
           }
           
           if (!q) {
-            return reply(`❌ Please provide a goodbye message!\n\nAvailable variables:\n@user - Mention user\n@group - Group name\n@count - Member count\n\nExample:\n.setgoodbye Goodbye @user! We'll miss you in @group`);
+            return reply(`âŒ Please provide a goodbye message!\n\nAvailable variables:\n@user - Mention user\n@group - Group name\n@count - Member count\n\nExample:\n.setgoodbye Goodbye @user! We'll miss you in @group`);
           }
           
           groupSetting.goodbyeMsg = q;
           groupSettings.set(from, groupSetting);
           saveGroupSettings();
-          reply('✅ Goodbye message has been updated!\n\nPreview:\n' + q.replace(/@user/g, '@user').replace(/@group/g, groupName).replace(/@count/g, participants.length));
+          reply('âœ… Goodbye message has been updated!\n\nPreview:\n' + q.replace(/@user/g, '@user').replace(/@group/g, groupName).replace(/@count/g, participants.length));
         }
         
         // RESET WELCOME
         else if (command === 'resetwelcome') {
           if (!isAdmins && !isOwner) {
-            return reply('❌ Only admins can use this command!');
+            return reply('âŒ Only admins can use this command!');
           }
           
           groupSetting.welcomeMsg = DEFAULT_WELCOME;
           groupSettings.set(from, groupSetting);
           saveGroupSettings();
-          reply('✅ Welcome message has been reset to default!');
+          reply('âœ… Welcome message has been reset to default!');
         }
         
         // RESET GOODBYE
         else if (command === 'resetgoodbye') {
           if (!isAdmins && !isOwner) {
-            return reply('❌ Only admins can use this command!');
+            return reply('âŒ Only admins can use this command!');
           }
           
           groupSetting.goodbyeMsg = DEFAULT_GOODBYE;
           groupSettings.set(from, groupSetting);
           saveGroupSettings();
-          reply('✅ Goodbye message has been reset to default!');
+          reply('âœ… Goodbye message has been reset to default!');
         }
         
         // SHOW WELCOME SETTINGS
         else if (command === 'welcomesettings' || command === 'wsettings') {
           if (!isAdmins && !isOwner) {
-            return reply('❌ Only admins can use this command!');
+            return reply('âŒ Only admins can use this command!');
           }
           
-          const settingsMsg = `╭──❍ *WELCOME SETTINGS* ❍──╮
-│
-├─❍ *Status:* ${groupSetting.welcome ? '✅ ON' : '❌ OFF'}
-├─❍ *Goodbye:* ${groupSetting.goodbye ? '✅ ON' : '❌ OFF'}
-│
-├─❍ *Welcome Message:*
-├─❍ ${groupSetting.welcomeMsg.substring(0, 50)}...
-│
-├─❍ *Goodbye Message:*
-├─❍ ${groupSetting.goodbyeMsg.substring(0, 50)}...
-│
-╰──────────────────────❍
+          const settingsMsg = `â•­â”€â”€â *WELCOME SETTINGS* ââ”€â”€â•®
+â”‚
+â”œâ”€â *Status:* ${groupSetting.welcome ? 'âœ… ON' : 'âŒ OFF'}
+â”œâ”€â *Goodbye:* ${groupSetting.goodbye ? 'âœ… ON' : 'âŒ OFF'}
+â”‚
+â”œâ”€â *Welcome Message:*
+â”œâ”€â ${groupSetting.welcomeMsg.substring(0, 50)}...
+â”‚
+â”œâ”€â *Goodbye Message:*
+â”œâ”€â ${groupSetting.goodbyeMsg.substring(0, 50)}...
+â”‚
+â•°â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â
 
 Commands:
 .welcome on/off
@@ -697,20 +690,20 @@ Commands:
               
               // Check permissions
               if (commandObj.category === 'owner' && !isOwner) {
-                return reply('❌ This command is only for bot owner!');
+                return reply('âŒ This command is only for bot owner!');
               }
               
               if (commandObj.category === 'group' && !isGroup) {
-                return reply('❌ This command can only be used in groups!');
+                return reply('âŒ This command can only be used in groups!');
               }
               
               if (commandObj.category === 'admin' && !isAdmins && !isOwner) {
-                return reply('❌ This command is only for group admins!');
+                return reply('âŒ This command is only for group admins!');
               }
               
               // Check if command is enabled for group
               if (commandObj.pattern === 'antilink' && groupSetting.antilink === false) {
-                return reply('❌ Anti-link is disabled in this group!');
+                return reply('âŒ Anti-link is disabled in this group!');
               }
               
               // React if specified
@@ -730,10 +723,10 @@ Commands:
                   getBuffer, fetchJson, mentions, prefix, runtime, sleep, isUrl,
                   groupSettings: groupSetting
                 });
-                console.log(`✅ Command executed: ${command}`);
+                console.log(`âœ… Command executed: ${command}`);
               } catch (err) {
-                console.error(`❌ Command error:`, err);
-                reply(`❌ Error: ${err.message}`);
+                console.error(`âŒ Command error:`, err);
+                reply(`âŒ Error: ${err.message}`);
               }
             }
           }
@@ -789,7 +782,7 @@ Commands:
         const linkRegex = /(https?:\/\/[^\s]+)|(www\.[^\s]+)|(chat\.whatsapp\.com\/[^\s]+)|(wa\.me\/[^\s]+)/gi;
         if (linkRegex.test(body)) {
           await sock.sendMessage(from, { delete: msg.key }).catch(() => {});
-          reply('⚠️ *Links are not allowed in this group!*');
+          reply('âš ï¸ *Links are not allowed in this group!*');
         }
       }
       
@@ -822,26 +815,26 @@ Commands:
                 messageType = 'Text';
               } else if (originalType === 'imageMessage') {
                 originalContent = deletedMsg.message.imageMessage?.caption || 'No caption';
-                messageType = '🖼️ Image';
+                messageType = 'ðŸ–¼ï¸ Image';
               } else if (originalType === 'videoMessage') {
                 originalContent = deletedMsg.message.videoMessage?.caption || 'No caption';
-                messageType = '🎥 Video';
+                messageType = 'ðŸŽ¥ Video';
               } else if (originalType === 'audioMessage') {
                 originalContent = 'Audio message';
-                messageType = '🎵 Audio';
+                messageType = 'ðŸŽµ Audio';
               } else if (originalType === 'stickerMessage') {
                 originalContent = 'Sticker';
-                messageType = '🎨 Sticker';
+                messageType = 'ðŸŽ¨ Sticker';
               } else {
                 originalContent = 'Media message';
-                messageType = '📎 Media';
+                messageType = 'ðŸ“Ž Media';
               }
               
-              const chatType = from.includes('@g.us') ? '👥 Group' : '👤 Private Chat';
+              const chatType = from.includes('@g.us') ? 'ðŸ‘¥ Group' : 'ðŸ‘¤ Private Chat';
               let groupNameText = '';
               
               if (from.includes('@g.us') && groupName) {
-                groupNameText = `\n├─❍ *Group:* ${groupName}`;
+                groupNameText = `\nâ”œâ”€â *Group:* ${groupName}`;
               }
               
               const now = new Date();
@@ -849,29 +842,29 @@ Commands:
               const dateStr = now.toLocaleDateString('en-PK');
               
               const deleteMessage = `
-╭──❍ *🚫 ANTI-DELETE ALERT* ❍──╮
-│
-├─❍ *Time:* ${timeStr}
-├─❍ *Date:* ${dateStr}
-├─❍ *Chat Type:* ${chatType}${groupNameText}
-│
-├─❍ *Deleted By:* @${deletedBy.split('@')[0]}
-├─❍ *Original Sender:* @${originalSender.split('@')[0]}
-│
-├─❍ *Message Type:* ${messageType}
-├─❍ *Content:* 
-├─❍ \`${originalContent.substring(0, 500)}${originalContent.length > 500 ? '...' : ''}\`
-│
-╰──────────────────────❍
+â•­â”€â”€â *ðŸš« ANTI-DELETE ALERT* ââ”€â”€â•®
+â”‚
+â”œâ”€â *Time:* ${timeStr}
+â”œâ”€â *Date:* ${dateStr}
+â”œâ”€â *Chat Type:* ${chatType}${groupNameText}
+â”‚
+â”œâ”€â *Deleted By:* @${deletedBy.split('@')[0]}
+â”œâ”€â *Original Sender:* @${originalSender.split('@')[0]}
+â”‚
+â”œâ”€â *Message Type:* ${messageType}
+â”œâ”€â *Content:* 
+â”œâ”€â \`${originalContent.substring(0, 500)}${originalContent.length > 500 ? '...' : ''}\`
+â”‚
+â•°â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â
         
-> _Message was deleted but bot saved it_ 🔰`;
+> _Message was deleted but bot saved it_ ðŸ”°`;
               
               await sock.sendMessage(sendTo, {
                 text: deleteMessage,
                 mentions: [deletedBy, originalSender]
               }).catch(() => {});
               
-              console.log(`🚫 Anti-delete: Message saved to inbox`);
+              console.log(`ðŸš« Anti-delete: Message saved to inbox`);
             }
           }
         } catch (e) {
@@ -880,7 +873,7 @@ Commands:
       }
       
     } catch (error) {
-      console.error("❌ Message handler error:", error);
+      console.error("âŒ Message handler error:", error);
     }
   });
 }
