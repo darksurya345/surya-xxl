@@ -242,7 +242,7 @@ async function connectToWA() {
       console.log(`âœ… Plugins loaded: ${loadedCount}/${pluginFiles.length}`);
       
       // Send connection message with image
-      const aliveMsg = `*â•­â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â—â—â–º*\n> *SURYA-X CONNECTED SUCCESSFULLY*\n\n> *Type ${prefix}menu to view commands*  \n\n*â•­âŠ±âœ« SURYA-X âœ«âŠ±â•®*\n*â”‚âœ«ðŸ“‚ Bot Name: ${botConfig.BOT_NAME}*\n*â”‚âœ«ðŸ›¡ï¸ Owner: ${config.OWNER_NAME}*\n*â”‚âœ«â™»ï¸ Prefix: ${prefix}*\n*â”‚âœ«ðŸŒ Mode: ${config.MODE}*\n*â”‚âœ«â° Uptime: ${runtime(process.uptime())}*\n*â•°â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â—â—â–º*\n\n> Enjoy Using SURYA-X`;
+      const aliveMsg = `*╭──────────────●●►*\n> *SURYA-X CONNECTED SUCCESSFULLY*\n\n> *Type ${prefix}menu to view commands*  \n\n*╭⊱✫ SURYA-X ✫⊱╮*\n*│✫📂 Bot Name: ${botConfig.BOT_NAME}*\n*│✫🛡️ Owner: ${config.OWNER_NAME}*\n*│✫♻️ Prefix: ${prefix}*\n*│✫🌍 Mode: ${config.MODE}*\n*│✫⏰ Uptime: ${runtime(process.uptime())}*\n*╰──────────────●●►*\n\n> Enjoy Using SURYA-X`;
       
       // Image URL for connection message
       const imageUrl = 'https://files.catbox.moe/jbrn0i.jpg';
